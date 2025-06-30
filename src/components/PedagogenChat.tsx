@@ -458,7 +458,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
 
       const payload = {
         message: pedagogicalPrompt,
-        aiModel: 'smart' // Gebruik Gemini 2.5 Flash voor goede kwaliteit en snelheid
+        aiModel: 'smart' // Gebruik Gemini 2.5 Flash (smart model) voor optimale balans tussen snelheid en kwaliteit
       }
 
       // Start streaming request
@@ -593,6 +593,19 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
 
   return (
     <div className="space-y-8">
+      {/* AI Model Indicator */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+        <div className="flex items-center justify-center space-x-2">
+          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+          <span className="text-blue-700 font-medium">
+            ⚡ Powered by Gemini 2.5 Flash - Optimale balans tussen snelheid en kwaliteit
+          </span>
+        </div>
+        <p className="text-blue-600 text-sm mt-1">
+          Alle antwoorden kunnen gedownload worden als Word-document via de download knop
+        </p>
+      </div>
+
       {/* Pedagoog Selector */}
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
@@ -667,6 +680,14 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
                 <div className="bg-gray-50 p-3 rounded-lg">
                   <p className="font-medium text-gray-800 mb-2">{item.pedagoog} antwoordt:</p>
                   <MarkdownRenderer content={item.answer} className="text-gray-700 text-sm" />
+                  
+                  {/* Word Download voor historische antwoorden */}
+                  <ResponseActions 
+                    content={item.answer}
+                    isMarkdown={true}
+                    isStreaming={false}
+                    className="mt-3"
+                  />
                 </div>
               </div>
             ))}
@@ -744,14 +765,23 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
               )}
             </div>
 
-            {/* Response Actions */}
+            {/* Response Actions - inclusief Word Download */}
             {!(response && response.startsWith('Error:')) && (
-              <ResponseActions 
-                content={isStreaming ? streamingResponse : response}
-                isMarkdown={true}
-                isStreaming={isStreaming}
-                className="mt-4"
-              />
+              <div className="mt-4">
+                <ResponseActions 
+                  content={isStreaming ? streamingResponse : response}
+                  isMarkdown={true}
+                  isStreaming={isStreaming}
+                  className=""
+                />
+                
+                {/* Extra info over Word download */}
+                {!isStreaming && (response || streamingResponse) && (
+                  <div className="mt-2 text-xs text-gray-600 bg-blue-50 p-2 rounded-lg">
+                    💡 <strong>Tip:</strong> Gebruik de "📄 Download Word" knop om dit antwoord van {selectedPedagoog.naam} op te slaan als professioneel Word-document!
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}
