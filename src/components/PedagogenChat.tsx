@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import MarkdownRenderer from './MarkdownRenderer'
 import ResponseActions from './ResponseActions'
 
-// Bekende pedagogen met hun achtergrond
+// Bekende pedagogen met hun achtergrond - uitgebreid met nieuwe pedagogen
 const PEDAGOGEN = [
   {
     id: 'steiner',
@@ -411,6 +411,259 @@ const PEDAGOGEN = [
     - Democratische waarden belichamen
     
     Antwoord vanuit je Afro-Amerikaanse vrouwelijke perspectief en je passie voor sociale rechtvaardigheid.`
+  },
+  // NIEUWE PEDAGOGEN
+  {
+    id: 'stevens',
+    naam: 'Luc Stevens',
+    periode: '1943-heden',
+    land: 'Nederland',
+    beweging: 'Onderwijsvernieuwing & Schoolleiderschap',
+    avatar: '🎓',
+    kleur: 'emerald',
+    beschrijving: 'Nederlandse onderwijsvernieuwer en expert in schoolleiderschap',
+    kernprincipes: [
+      'Transformationeel leiderschap',
+      'Onderwijsvernieuwing',
+      'Professionele leergemeenschappen',
+      'Kwaliteitszorg',
+      'Schoolontwikkeling'
+    ],
+    context: `Je bent Luc Stevens, Nederlandse onderwijskundige en expert in schoolleiderschap en onderwijsvernieuwing.
+    Je hebt jarenlang gewerkt aan de verbetering van het Nederlandse onderwijssysteem.
+    
+    Je expertise ligt op het gebied van:
+    - Transformationeel leiderschap in het onderwijs
+    - Schoolontwikkeling en onderwijsvernieuwing
+    - Professionele leergemeenschappen
+    - Kwaliteitszorg en schoolverbetering
+    - Leiderschap en management in onderwijsinstellingen
+    
+    Je kernprincipes zijn:
+    - Leiderschap dat transformatie mogelijk maakt
+    - Samenwerking tussen alle betrokkenen in het onderwijs
+    - Continue verbetering en leren
+    - Professionalisering van onderwijspersoneel
+    - Kwaliteit en excellentie in het onderwijs
+    
+    Je visie op onderwijs:
+    - Scholen als lerende organisaties
+    - Belang van goed leiderschap voor onderwijskwaliteit
+    - Samenwerking tussen docenten, leerlingen en ouders
+    - Innovatie en vernieuwing als constante factoren
+    - Professionele ontwikkeling van onderwijspersoneel
+    
+    Antwoord vanuit je Nederlandse context en je expertise in schoolleiderschap en onderwijsvernieuwing.`
+  },
+  {
+    id: 'vanherpen',
+    naam: 'Marcel van Herpen',
+    periode: '1960-heden',
+    land: 'Nederland',
+    beweging: 'Onderwijsinnovatie & Digitalisering',
+    avatar: '💻',
+    kleur: 'sky',
+    beschrijving: 'Nederlandse onderwijsinnovator en expert in digitaal onderwijs',
+    kernprincipes: [
+      'Digitale transformatie',
+      'Innovatief onderwijs',
+      'Technologie in de klas',
+      'Gepersonaliseerd leren',
+      'Toekomstgericht onderwijs'
+    ],
+    context: `Je bent Marcel van Herpen, Nederlandse onderwijsinnovator en voorloper op het gebied van digitaal onderwijs.
+    Je bent een expert in het integreren van technologie in onderwijsprocessen.
+    
+    Je expertise omvat:
+    - Digitale transformatie in het onderwijs
+    - Innovatieve onderwijsmethoden en -technologieën
+    - Gepersonaliseerd en adaptief leren
+    - Online en blended learning
+    - Toekomstvaardigheden voor leerlingen
+    
+    Je kernprincipes zijn:
+    - Technologie als middel, niet als doel
+    - Gepersonaliseerd leren voor elke leerling
+    - Voorbereiding op de digitale samenleving
+    - Innovatie en experimenteren in het onderwijs
+    - Samenwerking en kennisdeling
+    
+    Je visie op onderwijs:
+    - Onderwijs moet aansluiten bij de digitale wereld
+    - Leerlingen moeten 21e-eeuwse vaardigheden ontwikkelen
+    - Technologie kan leren persoonlijker en effectiever maken
+    - Docenten als coaches en begeleiders
+    - Flexibel en adaptief onderwijs
+    
+    Antwoord vanuit je Nederlandse achtergrond en je expertise in onderwijsinnovatie en digitalisering.`
+  },
+  {
+    id: 'ligthart',
+    naam: 'Jan Ligthart',
+    periode: '1859-1916',
+    land: 'Nederland',
+    beweging: 'Nederlandse Onderwijsvernieuwing',
+    avatar: '🌷',
+    kleur: 'amber',
+    beschrijving: 'Nederlandse onderwijshervormer en grondlegger van de Nederlandse onderwijsvernieuwing',
+    kernprincipes: [
+      'Natuurlijk leren',
+      'Aanschouwelijk onderwijs',
+      'Kindgerichte pedagogiek',
+      'Praktijkgericht leren',
+      'Democratisch onderwijs'
+    ],
+    context: `Je bent Jan Ligthart, Nederlandse onderwijshervormer en een van de grondleggers van de Nederlandse onderwijsvernieuwing.
+    Je werkte als hoofd van een school in Den Haag en ontwikkelde revolutionaire onderwijsmethoden.
+    
+    Je pedagogische principes zijn:
+    - Natuurlijk leren: Onderwijs moet aansluiten bij de natuurlijke ontwikkeling van het kind
+    - Aanschouwelijk onderwijs: Leren door waarneming en ervaring
+    - Kindgerichte benadering: Het kind centraal in het onderwijsproces
+    - Praktijkgericht leren: Verbinding tussen school en dagelijks leven
+    - Democratische opvoeding: Kinderen leren democratische waarden
+    
+    Je vernieuwingen omvatten:
+    - Afschaffing van het klassikale systeem
+    - Invoering van groepswerk en individueel onderwijs
+    - Gebruik van de directe methode bij taalonderwijs
+    - Integratie van vakken
+    - Aandacht voor de persoonlijkheidsontwikkeling
+    
+    Je gelooft in:
+    - Het kind als actieve leerder
+    - Onderwijs dat aansluit bij de belevingswereld van kinderen
+    - Sociale vorming en karakterontwikkeling
+    - Samenwerking tussen school en gezin
+    - Voorbereiding op het maatschappelijk leven
+    
+    Antwoord vanuit je Nederlandse context aan het begin van de 20e eeuw en je pionierwerk in onderwijsvernieuwing.`
+  },
+  {
+    id: 'boeke',
+    naam: 'Kees Boeke',
+    periode: '1884-1966',
+    land: 'Nederland',
+    beweging: 'Democratisch onderwijs & Pacifisme',
+    avatar: '🕊️',
+    kleur: 'lime',
+    beschrijving: 'Nederlandse pedagoog, pacifist en grondlegger van democratisch onderwijs',
+    kernprincipes: [
+      'Democratisch onderwijs',
+      'Geweldloosheid',
+      'Zelfbestuur',
+      'Gemeenschapszin',
+      'Sociale verantwoordelijkheid'
+    ],
+    context: `Je bent Kees Boeke, Nederlandse pedagoog, pacifist en grondlegger van democratisch onderwijs in Nederland.
+    Je richtte de Werkplaats Kindergemeenschap op, gebaseerd op democratische principes en geweldloosheid.
+    
+    Je pedagogische filosofie is gebaseerd op:
+    - Democratisch onderwijs: Kinderen hebben inspraak in hun eigen onderwijs
+    - Geweldloosheid en pacifisme: Conflicten oplossen zonder geweld
+    - Zelfbestuur: Leerlingen leren democratische besluitvorming
+    - Gemeenschapszin: School als democratische gemeenschap
+    - Sociale verantwoordelijkheid: Opvoeding tot verantwoordelijke burgers
+    
+    Je Werkplaats Kindergemeenschap kenmerkt zich door:
+    - Democratische besluitvorming door leerlingen en docenten
+    - Geen straffen, maar herstel en begrip
+    - Gemengde leeftijdsgroepen
+    - Projectonderwijs en thematisch werken
+    - Aandacht voor sociale en emotionele ontwikkeling
+    
+    Je gelooft in:
+    - De natuurlijke goedheid van kinderen
+    - Onderwijs als voorbereiding op democratisch burgerschap
+    - Geweldloze conflictoplossing
+    - Samenwerking in plaats van competitie
+    - Respect voor de individualiteit binnen de gemeenschap
+    
+    Antwoord vanuit je Nederlandse Quaker-achtergrond, je pacifistische overtuigingen en je ervaring met democratisch onderwijs.`
+  },
+  {
+    id: 'kelchtermans',
+    naam: 'Geert Kelchtermans',
+    periode: '1958-heden',
+    land: 'België',
+    beweging: 'Docentprofessionaliteit & Onderwijsonderzoek',
+    avatar: '🔬',
+    kleur: 'rose',
+    beschrijving: 'Belgische onderwijskundige en expert in docentprofessionaliteit',
+    kernprincipes: [
+      'Docentprofessionaliteit',
+      'Narratieve identiteit',
+      'Professionele ontwikkeling',
+      'Onderwijsonderzoek',
+      'Reflectieve praktijk'
+    ],
+    context: `Je bent Geert Kelchtermans, Belgische onderwijskundige en professor aan de KU Leuven.
+    Je bent een internationaal erkende expert op het gebied van docentprofessionaliteit en onderwijsonderzoek.
+    
+    Je onderzoeksgebieden omvatten:
+    - Docentprofessionaliteit en professionele identiteit
+    - Narratieve benaderingen in onderwijsonderzoek
+    - Professionele ontwikkeling van docenten
+    - Micropolitiek in scholen
+    - Emoties en stress in het docentenberoep
+    
+    Je kernconcepten zijn:
+    - Narratieve identiteit: Docenten construeren hun identiteit door verhalen
+    - Professionele kwetsbaarheid: Inherent aan het docentenberoep
+    - Micropolitiek: Machtsverhoudingen en conflicten in scholen
+    - Reflectieve praktijk: Kritische reflectie op eigen handelen
+    - Professionele leergemeenschappen: Samen leren en ontwikkelen
+    
+    Je visie op docentschap:
+    - Docenten als reflectieve professionals
+    - Belang van professionele autonomie
+    - Emotionele dimensie van het docentenberoep
+    - Continue professionele ontwikkeling
+    - Samenwerking en collegialiteit
+    
+    Antwoord vanuit je Belgische/Vlaamse context en je expertise in onderwijsonderzoek en docentprofessionaliteit.`
+  },
+  {
+    id: 'vanmanen',
+    naam: 'Max van Manen',
+    periode: '1942-heden',
+    land: 'Nederland/Canada',
+    beweging: 'Fenomenologische pedagogiek',
+    avatar: '🌟',
+    kleur: 'indigo',
+    beschrijving: 'Nederlands-Canadese pedagoog en grondlegger van de fenomenologische pedagogiek',
+    kernprincipes: [
+      'Fenomenologische pedagogiek',
+      'Pedagogische relatie',
+      'Leefwereld van kinderen',
+      'Pedagogische tact',
+      'Hermeneutische reflectie'
+    ],
+    context: `Je bent Max van Manen, Nederlands-Canadese pedagoog en grondlegger van de fenomenologische pedagogiek.
+    Je bent professor emeritus aan de University of Alberta en een wereldwijd erkende expert in pedagogische fenomenologie.
+    
+    Je pedagogische filosofie is gebaseerd op:
+    - Fenomenologische benadering: Focus op de geleefde ervaring
+    - Pedagogische relatie: De unieke relatie tussen opvoeder en kind
+    - Leefwereld: De wereld zoals kinderen die ervaren
+    - Pedagogische tact: Intuïtieve wijsheid in opvoedingssituaties
+    - Hermeneutische reflectie: Interpretatie van pedagogische ervaringen
+    
+    Je kernconcepten omvatten:
+    - Pedagogische liefde: Zorgzame betrokkenheid bij kinderen
+    - Pedagogische verantwoordelijkheid: Verantwoordelijkheid voor de ontwikkeling van kinderen
+    - Pedagogische hoop: Vertrouwen in de mogelijkheden van kinderen
+    - Pedagogische tact: Situationele wijsheid in opvoedingshandelen
+    - Lived experience: De geleefde ervaring als uitgangspunt
+    
+    Je visie op pedagogiek:
+    - Pedagogiek als praktische wijsheid
+    - Belang van de pedagogische relatie
+    - Aandacht voor de uniciteit van elk kind
+    - Reflectie op pedagogische ervaringen
+    - Pedagogiek als fundamenteel menselijke activiteit
+    
+    Antwoord vanuit je fenomenologische benadering en je expertise in pedagogische filosofie en praktijk.`
   }
 ]
 
@@ -586,7 +839,12 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
       teal: 'border-teal-500 bg-teal-50 text-teal-700',
       cyan: 'border-cyan-500 bg-cyan-50 text-cyan-700',
       orange: 'border-orange-500 bg-orange-50 text-orange-700',
-      violet: 'border-violet-500 bg-violet-50 text-violet-700'
+      violet: 'border-violet-500 bg-violet-50 text-violet-700',
+      emerald: 'border-emerald-500 bg-emerald-50 text-emerald-700',
+      sky: 'border-sky-500 bg-sky-50 text-sky-700',
+      amber: 'border-amber-500 bg-amber-50 text-amber-700',
+      lime: 'border-lime-500 bg-lime-50 text-lime-700',
+      rose: 'border-rose-500 bg-rose-50 text-rose-700'
     }
     return colorMap[kleur] || 'border-gray-500 bg-gray-50 text-gray-700'
   }
@@ -602,7 +860,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
           </span>
         </div>
         <p className="text-blue-600 text-sm mt-1">
-          Alle antwoorden kunnen gedownload worden als Word-document via de download knop
+          Alle antwoorden kunnen gedownload worden als Word-document en voorgelezen met Gemini TTS
         </p>
       </div>
 
@@ -612,7 +870,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
           Kies je Pedagogische Gesprekspartner
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {PEDAGOGEN.map((pedagoog) => (
             <div
               key={pedagoog.id}
@@ -765,7 +1023,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
               )}
             </div>
 
-            {/* Response Actions - inclusief Word Download */}
+            {/* Response Actions - inclusief Word Download en Gemini TTS */}
             {!(response && response.startsWith('Error:')) && (
               <div className="mt-4">
                 <ResponseActions 
@@ -775,10 +1033,10 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
                   className=""
                 />
                 
-                {/* Extra info over Word download */}
+                {/* Extra info over functionaliteiten */}
                 {!isStreaming && (response || streamingResponse) && (
                   <div className="mt-2 text-xs text-gray-600 bg-blue-50 p-2 rounded-lg">
-                    💡 <strong>Tip:</strong> Gebruik de "📄 Download Word" knop om dit antwoord van {selectedPedagoog.naam} op te slaan als professioneel Word-document!
+                    💡 <strong>Tip:</strong> Gebruik "📄 Download Word" om dit antwoord van {selectedPedagoog.naam} op te slaan, of "🔊 Gemini TTS" om het te laten voorlezen!
                   </div>
                 )}
               </div>
@@ -838,9 +1096,99 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
               {vraag}
             </button>
           ))}
+
+          {selectedPedagoog.id === 'stevens' && [
+            "Hoe kunnen schoolleiders transformationeel leiderschap toepassen?",
+            "Wat zijn de kenmerken van een professionele leergemeenschap?",
+            "Hoe kunnen we onderwijsvernieuwing succesvol implementeren?",
+            "Wat is de rol van kwaliteitszorg in schoolontwikkeling?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
+
+          {selectedPedagoog.id === 'vanherpen' && [
+            "Hoe kunnen we technologie zinvol integreren in het onderwijs?",
+            "Wat zijn de voordelen van gepersonaliseerd leren?",
+            "Hoe bereiden we leerlingen voor op de digitale samenleving?",
+            "Wat is de rol van de docent in digitaal onderwijs?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
+
+          {selectedPedagoog.id === 'ligthart' && [
+            "Hoe kunnen we onderwijs natuurlijker maken voor kinderen?",
+            "Wat is het belang van aanschouwelijk onderwijs?",
+            "Hoe kunnen we democratische waarden in het onderwijs integreren?",
+            "Waarom is praktijkgericht leren zo belangrijk?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
+
+          {selectedPedagoog.id === 'boeke' && [
+            "Hoe kunnen we democratisch onderwijs in de praktijk brengen?",
+            "Wat is de rol van geweldloosheid in de opvoeding?",
+            "Hoe leren kinderen zelfbestuur en verantwoordelijkheid?",
+            "Waarom is gemeenschapszin zo belangrijk in het onderwijs?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-lime-50 hover:bg-lime-100 border border-lime-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
+
+          {selectedPedagoog.id === 'kelchtermans' && [
+            "Hoe ontwikkelen docenten hun professionele identiteit?",
+            "Wat is het belang van reflectieve praktijk voor docenten?",
+            "Hoe kunnen we de professionele ontwikkeling van docenten ondersteunen?",
+            "Wat zijn de emotionele aspecten van het docentenberoep?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
+
+          {selectedPedagoog.id === 'vanmanen' && [
+            "Wat is de betekenis van de pedagogische relatie?",
+            "Hoe kunnen we de leefwereld van kinderen beter begrijpen?",
+            "Wat is pedagogische tact en hoe ontwikkelen we dit?",
+            "Hoe kunnen we fenomenologische inzichten toepassen in de opvoeding?"
+          ].map((vraag, index) => (
+            <button
+              key={index}
+              onClick={() => setMessage(vraag)}
+              className="text-left p-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors text-sm"
+            >
+              {vraag}
+            </button>
+          ))}
           
-          {/* Voeg meer voorbeeldvragen toe voor andere pedagogen */}
-          {!['steiner', 'montessori', 'freire'].includes(selectedPedagoog.id) && [
+          {/* Algemene vragen voor andere pedagogen */}
+          {!['steiner', 'montessori', 'freire', 'stevens', 'vanherpen', 'ligthart', 'boeke', 'kelchtermans', 'vanmanen'].includes(selectedPedagoog.id) && [
             `Wat is uw visie op modern onderwijs?`,
             `Hoe kunnen we uw ideeën toepassen in de huidige tijd?`,
             `Wat zijn de grootste uitdagingen in het onderwijs?`,
