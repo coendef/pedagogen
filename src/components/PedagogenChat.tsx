@@ -688,6 +688,7 @@ export default function PedagogenChat() {
   const [isLoading, setIsLoading] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
   const [isWaitingForStream, setIsWaitingForStream] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [conversationHistory, setConversationHistory] = useState<Array<{question: string, answer: string, pedagoog: string}>>([])
   
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -704,6 +705,7 @@ export default function PedagogenChat() {
     setIsLoading(false)
     setStreamingResponse('')
     setResponse('')
+    setError(null)
     currentStreamingResponseRef.current = ''
     hasReceivedFirstTokenRef.current = false
 
@@ -738,7 +740,24 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
       })
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        // Try to get error details from response
+        let errorMessage = `HTTP error! status: ${response.status}`
+        try {
+          const errorData = await response.json()
+          if (errorData.error) {
+            errorMessage = errorData.error
+            if (errorData.hint) {
+              errorMessage += `\n\nTip: ${errorData.hint}`
+            }
+            if (errorData.debug && process.env.NODE_ENV === 'development') {
+              errorMessage += `\n\nDebug: ${errorData.debug}`
+            }
+          }
+        } catch (parseError) {
+          // If we can't parse the error response, use the status
+          console.error('Could not parse error response:', parseError)
+        }
+        throw new Error(errorMessage)
       }
 
       // Process streaming response
@@ -812,12 +831,13 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
       
       if (error.name === 'AbortError') {
         if (!currentStreamingResponseRef.current) {
-          setResponse('Gesprek gestopt door gebruiker.')
+          setError('Gesprek gestopt door gebruiker.')
         } else {
           setResponse(currentStreamingResponseRef.current)
         }
       } else {
-        setResponse('Error: ' + (error instanceof Error ? error.message : 'Onbekende fout'))
+        const errorMessage = error instanceof Error ? error.message : 'Onbekende fout opgetreden'
+        setError(errorMessage)
       }
     } finally {
       setIsStreaming(false)
@@ -839,6 +859,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
     setResponse('')
     setStreamingResponse('')
     setMessage('')
+    setError(null)
   }
 
   const getColorClasses = (kleur: string) => {
@@ -915,6 +936,45 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
           </div>
         </div>
       </div>
+
+      {/* Error Display */}
+      {error && (
+        <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6">
+          <div className="flex items-start space-x-3">
+            <div className="text-2xl">⚠️</div>
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-red-800 mb-2">Er is een probleem opgetreden</h3>
+              <div className="text-red-700 whitespace-pre-line">{error}</div>
+              
+              {error.includes('API configuratie ontbreekt') && (
+                <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <h4 className="font-semibold text-blue-800 mb-2">🔧 Oplossing:</h4>
+                  <p className="text-blue-700 text-sm">
+                    De GEMINI_API_KEY environment variable is niet ingesteld. 
+                    Voeg deze toe aan je deployment omgeving:
+                  </p>
+                  <ol className="list-decimal list-inside mt-2 text-blue-700 text-sm space-y-1">
+                    <li>Ga naar je Netlify dashboard</li>
+                    <li>Site Settings → Environment Variables</li>
+                    <li>Voeg toe: <code className="bg-blue-100 px-1 rounded">GEMINI_API_KEY</code> met je API key</li>
+                    <li>Deploy opnieuw</li>
+                  </ol>
+                  <p className="mt-2 text-blue-600 text-sm">
+                    📖 Meer info: <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="underline">Google AI Studio</a>
+                  </p>
+                </div>
+              )}
+              
+              <button
+                onClick={() => setError(null)}
+                className="mt-3 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
+              >
+                Sluiten
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Conversation History */}
       {conversationHistory.length > 0 && (
@@ -999,7 +1059,7 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
           </div>
         )}
 
-        {(response || streamingResponse || isStreaming) && !isWaitingForStream && (
+        {(response || streamingResponse || isStreaming) && !isWaitingForStream && !error && (
           <div className={`p-6 rounded-xl border-2 ${getColorClasses(selectedPedagoog.kleur)}`}>
             <div className="flex items-center space-x-3 mb-4">
               <div className="text-3xl">{selectedPedagoog.avatar}</div>
@@ -1025,23 +1085,21 @@ Houd je antwoord informatief maar toegankelijk, ongeveer 200-400 woorden.`
             </div>
 
             {/* Response Actions - inclusief Word Download */}
-            {!(response && response.startsWith('Error:')) && (
-              <div className="mt-4">
-                <ResponseActions 
-                  content={isStreaming ? streamingResponse : response}
-                  isMarkdown={true}
-                  isStreaming={isStreaming}
-                  className=""
-                />
-                
-                {/* Extra info over Word download */}
-                {!isStreaming && (response || streamingResponse) && (
-                  <div className="mt-2 text-xs text-gray-600 bg-blue-50 p-2 rounded-lg">
-                    💡 <strong>Tip:</strong> Gebruik de "📄 Download Word" knop om dit antwoord van {selectedPedagoog.naam} op te slaan als professioneel Word-document!
-                  </div>
-                )}
-              </div>
-            )}
+            <div className="mt-4">
+              <ResponseActions 
+                content={isStreaming ? streamingResponse : response}
+                isMarkdown={true}
+                isStreaming={isStreaming}
+                className=""
+              />
+              
+              {/* Extra info over Word download */}
+              {!isStreaming && (response || streamingResponse) && (
+                <div className="mt-2 text-xs text-gray-600 bg-blue-50 p-2 rounded-lg">
+                  💡 <strong>Tip:</strong> Gebruik de "📄 Download Word" knop om dit antwoord van {selectedPedagoog.naam} op te slaan als professioneel Word-document!
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
